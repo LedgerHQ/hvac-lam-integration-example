@@ -1,0 +1,18 @@
+version: '3.5'
+
+services:
+  hvac:
+    image: vault
+    env_file:
+      - ./env_files/hvac.env
+    ports:
+      - 8200:8200
+    cap_add:
+      - IPC_LOCK
+  vault-lam:
+    image: fzsa0fdr.gra5.container-registry.ovh.net/vault_lam_distribution/vault-lam:v1-latest
+    env_file:
+      - ./env_files/lam.env
+    ports:
+      - 5000:5000
+    command: "/app/run.sh"
